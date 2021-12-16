@@ -9,31 +9,32 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixt = {
-      url = "github:nix-community/nixt/typescript-rewrite";
-    };
+    nixt = { url = "github:nix-community/nixt/typescript-rewrite"; };
   };
 
   outputs = inputs@{ nixpkgs, home-manager, ... }:
     let
-      recImport = nixpkgs.legacyPackages.x86_64-linux.callPackage ./utils/recImport.nix {};
+      recImport =
+        nixpkgs.legacyPackages.x86_64-linux.callPackage ./utils/recImport.nix
+        { };
       localModules = recImport ./modules;
     in {
-    nixosConfigurations = {
-      logos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux"; # the system architecture
-        modules =
-          localModules ++ [
+      nixosModules = localModules;
+      nixosConfigurations = {
+        logos = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux"; # the system architecture
+          modules = localModules ++ [
             home-manager.nixosModules.home-manager
             ./hosts/x86_64-linux/logos
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.ldlework = import ./hosts/x86_64-linux/logos/ldlework.nix;
+              home-manager.users.ldlework =
+                import ./hosts/x86_64-linux/logos/ldlework.nix;
             }
           ];
-        specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs; };
+        };
       };
     };
-  };
 }
