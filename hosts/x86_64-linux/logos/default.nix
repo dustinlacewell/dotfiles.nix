@@ -1,9 +1,6 @@
-{ config, pkgs, lib, modulesPath, inputs, ... }:
+{ config, pkgs, lib, modulesPath, inputs, secrets, ... }:
 
-let
-  secrets = import ../../../secrets.nix;
-
-in {
+{
   ldlework.vm = {
     enable = true;
     graphical = true;

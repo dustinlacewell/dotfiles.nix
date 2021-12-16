@@ -91,7 +91,19 @@
         "home-manager": "home-manager",
         "myhello": "myhello",
         "nixpkgs": "nixpkgs",
-        "nixt": "nixt"
+        "nixt": "nixt",
+        "secrets": "secrets"
+      }
+    },
+    "secrets": {
+      "locked": {
+        "narHash": "sha256-cwIF16UaFMSQWaGTV87Yf3mvjke5a+CUiZnyC0VfdPM=",
+        "path": "/home/ldlework/dotfiles-secrets",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/ldlework/dotfiles-secrets",
+        "type": "path"
       }
     },
     "utils": {
